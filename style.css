@@ -1,0 +1,149 @@
+/* Resetando o estilo padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+  
+  .container {
+    display: flex;
+    gap: 40px;
+  }
+  
+  /* Poço do elevador */
+  .elevator-shaft {
+    width: 150px;
+    height: 400px;
+    background: #ccc;
+    border: 2px solid #555;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .floor-label {
+    position: absolute;
+    left: -30px;
+    width: 30px;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .floor-label:nth-child(1) { bottom: 0; }
+  .floor-label:nth-child(2) { bottom: 100px; }
+  .floor-label:nth-child(3) { bottom: 200px; }
+  .floor-label:nth-child(4) { bottom: 300px; }
+  
+  /* Elevador */
+  .elevator {
+    width: 100%;
+    height: 100px;
+    background: #444;
+    position: absolute;
+    bottom: 0;
+    transition: bottom 2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .doors {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .door {
+    width: 50%;
+    height: 100%;
+    background: #888;
+    transition: all 1s;
+  }
+  
+  .open-left {
+    transform: translateX(-100%);
+  }
+  
+  .open-right {
+    transform: translateX(100%);
+  }
+  
+  /* Painel de botões */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .panel button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Card de logs */
+  .log-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    height: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .log-card h3 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #4b7bec;
+  }
+  
+  #logList {
+    list-style-type: none;
+    padding: 0;
+    height: 200px;
+    overflow-y: auto;
+  }
+  
+  #logList li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  #clearLogs {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    font-size: 14px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  #clearLogs:hover {
+    background: #ff1a1a;
+  }
+  
+  #clearLogs:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
