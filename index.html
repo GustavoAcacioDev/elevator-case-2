@@ -9,26 +9,42 @@
 <body>
   <div class="container">
     <div class="elevator-shaft">
+      <div class="floor-dividers">
+        <div class="floor-divider"></div>
+        <div class="floor-divider"></div>
+        <div class="floor-divider"></div>
+      </div>
       <div class="floor-label" id="label3">3</div>
       <div class="floor-label" id="label2">2</div>
       <div class="floor-label" id="label1">1</div>
-      <div class="floor-label" id="label0">0</div>
+      <div class="floor-label" id="label0">T</div>
       <div class="elevator" id="elevator">
+        <div class="elevator-interior">
+          <div class="elevator-panel">
+            <div class="panel-indicator"></div>
+          </div>
+        </div>
         <div class="doors">
           <div class="door" id="door-left"></div>
           <div class="door" id="door-right"></div>
         </div>
       </div>
+      <!-- Visor de andar -->
+      <div class="floor-display">
+        <div class="display-screen">
+          <span id="current-floor-display">T</span>
+        </div>
+      </div>
     </div>
 
     <div class="panel">
+      <h3>Controle do Elevador</h3>
       <button id="btn3">Andar 3</button>
       <button id="btn2">Andar 2</button>
       <button id="btn1">Andar 1</button>
       <button id="btn0">Térreo</button>
     </div>
 
-    <!-- Card de Logs -->
     <div class="log-card">
       <h3>Logs do Elevador</h3>
       <ul id="logList"></ul>
@@ -36,7 +52,6 @@
     </div>
   </div>
 
-  <!-- script.js só é executado após o HTML carregar -->
   <script src="script.js" defer></script>
 </body>
 </html>

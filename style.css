@@ -1,149 +1,334 @@
 /* Resetando o estilo padrão */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    padding-top: 40px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+/* Poço do elevador */
+.elevator-shaft {
+  width: 180px;
+  height: 450px;
+  background: #e0e0e0;
+  border: 3px solid #333;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Divisores de andar */
+.floor-dividers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.floor-divider {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #999;
+  left: 0;
+}
+
+.floor-divider:nth-child(1) {
+  bottom: 100px;
+}
+
+.floor-divider:nth-child(2) {
+  bottom: 200px;
+}
+
+.floor-divider:nth-child(3) {
+  bottom: 300px;
+}
+
+.floor-label {
+  position: absolute;
+  left: -35px;
+  width: 30px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+#label0 { bottom: 10px; }
+#label1 { bottom: 110px; }
+#label2 { bottom: 210px; }
+#label3 { bottom: 310px; }
+
+/* Elevador */
+.elevator {
+  width: calc(100% - 10px);
+  height: 100px;
+  background: linear-gradient(to bottom, #505050, #333);
+  position: absolute;
+  left: 5px;
+  bottom: 0;
+  transition: bottom 2s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.elevator-interior {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.door.open-left ~ .elevator-interior,
+.door.open-right ~ .elevator-interior {
+  opacity: 1;
+}
+
+.elevator-panel {
+  width: 15px;
+  height: 60px;
+  background: #222;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
+  margin-right: 10px;
+}
+
+.panel-indicator {
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  margin-bottom: 3px;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+/* Visor de andar */
+.floor-display {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 3;
+}
+
+.display-screen {
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #444;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#current-floor-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5722;
+  font-family: 'Digital', monospace;
+  text-shadow: 0 0 5px rgba(255, 87, 34, 0.7);
+}
+
+.doors {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.door {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, #8e9eab, #b3bfc8);
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #666;
+}
+
+#door-left {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+#door-right {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+
+.open-left {
+  transform: translateX(-101%);
+}
+
+.open-right {
+  transform: translateX(101%);
+}
+
+/* Painel de botões */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: linear-gradient(to bottom, #34495e, #2c3e50);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.panel button {
+  padding: 12px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #4b7bec, #3867d6);
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.panel button:hover {
+  background: linear-gradient(to bottom, #3867d6, #2854c7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.panel button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card de logs */
+.log-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  height: 350px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.log-card h3 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #3867d6;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+#logList {
+  list-style-type: none;
+  padding: 0;
+  height: 230px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+#logList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#logList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#logList::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+#logList::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+#logList li {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  border-left: 3px solid #4b7bec;
+}
+
+#clearLogs {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 15px;
+  font-size: 14px;
+  background: linear-gradient(to bottom, #ff6b6b, #ee5253);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#clearLogs:hover {
+  background: linear-gradient(to bottom, #ee5253, #dc3545);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#clearLogs:active {
+  transform: translateX(-50%) translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
   .container {
-    display: flex;
-    gap: 40px;
-  }
-  
-  /* Poço do elevador */
-  .elevator-shaft {
-    width: 150px;
-    height: 400px;
-    background: #ccc;
-    border: 2px solid #555;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .floor-label {
-    position: absolute;
-    left: -30px;
-    width: 30px;
-    text-align: right;
-    font-weight: bold;
-  }
-  
-  .floor-label:nth-child(1) { bottom: 0; }
-  .floor-label:nth-child(2) { bottom: 100px; }
-  .floor-label:nth-child(3) { bottom: 200px; }
-  .floor-label:nth-child(4) { bottom: 300px; }
-  
-  /* Elevador */
-  .elevator {
-    width: 100%;
-    height: 100px;
-    background: #444;
-    position: absolute;
-    bottom: 0;
-    transition: bottom 2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .doors {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .door {
-    width: 50%;
-    height: 100%;
-    background: #888;
-    transition: all 1s;
-  }
-  
-  .open-left {
-    transform: translateX(-100%);
-  }
-  
-  .open-right {
-    transform: translateX(100%);
-  }
-  
-  /* Painel de botões */
-  .panel {
-    display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
   }
   
-  .panel button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
+  .elevator-shaft {
+    width: 160px;
+    height: 400px;
   }
   
-  /* Card de logs */
   .log-card {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 10px;
-    width: 250px;
-    height: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
+    width: 100%;
+    max-width: 320px;
   }
-  
-  .log-card h3 {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #4b7bec;
-  }
-  
-  #logList {
-    list-style-type: none;
-    padding: 0;
-    height: 200px;
-    overflow-y: auto;
-  }
-  
-  #logList li {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  #clearLogs {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 10px;
-    font-size: 14px;
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  #clearLogs:hover {
-    background: #ff1a1a;
-  }
-  
-  #clearLogs:active {
-    transform: translateY(3px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+}
